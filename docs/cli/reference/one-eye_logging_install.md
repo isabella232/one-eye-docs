@@ -18,7 +18,7 @@ one-eye logging install [flags]
 
 ```
   -h, --help                    help for install
-      --operator-image string   override operator image
+      --operator-image string   override operator image (default "banzaicloud/logging-operator:3.1.0-rc1")
       --prometheus              install prometheus and grafana using prometheus operator
       --update                  update observer configuration
 ```

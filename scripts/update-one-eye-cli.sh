@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euf
+set -eux
 
 ROOT="$(git rev-parse --show-toplevel)"
 
@@ -12,9 +12,10 @@ function update_docs()
   mkdir -p tmp
   git clone --depth 1 -b "${RELEASE_TAG}" "git@github.com:banzaicloud/one-eye.git" "tmp/one-eye"
   cd 'tmp/one-eye/'
-  rm -rf ./docs/reference
+  rm -rf ./cmd/docs/*.md
   make docs
-  cp -R ./docs/reference "${ROOT}/docs/cli/reference"
+  echo $PWD
+  cp $PWD/cmd/docs/*.md "${ROOT}/docs/cli/reference/"
   cd -
   rm -rf tmp
 }
@@ -29,6 +30,7 @@ function main()
     git checkout master
     git merge "${BRANCH}"
     git push origin master
+    echo "Commit has changed."
   else
     echo "Nothing has changed."
     circleci-agent step halt

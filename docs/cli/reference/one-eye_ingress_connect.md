@@ -1,23 +1,23 @@
 ---
-title: one-eye prometheus delete
+title: one-eye ingress connect
 generated_file: true
 ---
-## one-eye prometheus delete
+## one-eye ingress connect
 
-Delete prometheus-operator
+Connect to the main ingress endpoint
 
 ### Synopsis
 
-Delete prometheus-operator
+Connect to the main ingress endpoint
 
 ```
-one-eye prometheus delete [flags]
+one-eye ingress connect [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help   help for connect
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +31,5 @@ one-eye prometheus delete [flags]
 
 ### SEE ALSO
 
-* [one-eye prometheus](/docs/one-eye/cli/reference/one-eye_prometheus/)	 - Manage the prometheus-operator chart
+* [one-eye ingress](/docs/one-eye/cli/reference/one-eye_ingress/)	 - Manage ingress for one-eye
 
