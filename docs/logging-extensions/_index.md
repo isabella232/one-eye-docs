@@ -5,7 +5,7 @@ weight: 500
 
 {{< contents >}}
 
-Logging extensions are part of the Banzai Cloud One Eye observability system, and are the commercial extensions of the Logging operator. Logging extensions were specifically developed to solve the problems of enterprises:
+Logging extensions are part of the Banzai Cloud One Eye observability system, and are also a standalone operator. Logging extensions were specifically developed to solve the problems of enterprises:
 
 - Collecting Kubernetes events to provide insight into what is happening
 inside a cluster, such as decisions made by the scheduler, or
@@ -13,37 +13,9 @@ why some pods were evicted from the node.
 - Collect logs from the nodes like `kubelet` logs.
 - Collect logs from files on the nodes, for example, `audit` logs, or the `systemd` journal.
 
-You can configure the extensions in the One Eye custom resource configuration.
+You can configure the extensions in the One Eye custom resource configuration. It's also a standalone kubernetes operator.
 
 > Follow [this guide](/docs/one-eye/cli/install/) to install the One Eye command line tool.
-
-## Quick start with Kubelet and Event logs
-
-1. Create a file named `observer.yaml`
-
-    ```yaml
-    apiVersion: one-eye.banzaicloud.io/v1alpha1
-    kind: Observer
-    metadata:
-      name: observer
-    spec:
-      controlNamespace: default
-      logging:
-        kubernetesEventTailer: {}
-        hostTailers:
-          systemdTailers:
-            - name: kubelet
-              systemdFilter: kubelet.service
-          fileTailers:
-            - name: messages
-              path: /var/log/messages
-    ```
-
-1. Apply configuration to the cluster (your current Kubernetes context):
-
-    ```bash
-    one-eye reconcile -f observer.yaml
-    ```
 
 ## Kubernetes Event Tailer
 
@@ -54,101 +26,147 @@ why some pods were evicted from the node.
 ### Example: configuration Kubernetes event tailer
 
 ```bash
-one-eye reconcile -f - <<EOF
-apiVersion: one-eye.banzaicloud.io/v1alpha1
-kind: Observer
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: EventTailer
 metadata:
-  name: observer
+  name: sample-eventtailer
 spec:
   controlNamespace: default
-  logging:
-    kubernetesEventTailer: {}
+EOF
+```
+
+### Example: configuration Kubernetes event tailer with PVC
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: EventTailer
+metadata:
+  name: sample-eventtailer
+spec:
+  controlNamespace: default
+  positionVolume:
+    pvc:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        volumeMode: Filesystem
 EOF
 ```
 
 ### Configuration options
-
-| Variable Name | Type | Description |
-|---|---|---|
-|disabled|`bool`|Disable this component without clearing other configuration options|
-|selectorLabels|`map[string]string`|Add the specified labels for matching underlying pods by the deployment|
-|workloadMetaOverrides|[types.MetaBase](#metabase)|Override metadata of the created resources|
-|workloadOverrides|[types.PodSpecBase](#podspecbase)|Override podSpec fields for the given deployment|
-|containerOverrides|[types.ContainerBase](#containerbase)|Override container fields for the given deployment|
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| controlNamespace | string | Yes | - | The resources of EventTailer will be placed into this namespace<br> |
+| positionVolume | volume.KubernetesVolume | No | - | Volume definition for tracking fluentbit file positions (optional)<br> |
+| workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
+| workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given statefulset<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given statefulset<br> |
 
 ## Kubernetes Host Tailers
 
 Tailing logs from the nodes like `kubelet`, `audit` logs or from the `systemd` journal.
 
-### Systemd Tailer configuration options
+### Example: configuration Kubernetes host tailer with multiple tailers
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: HostTailer
+metadata:
+  name: hosttailer-sample
+spec:
+  controlNamespace: default
+  enableRecreateWorkloadOnImmutableFieldChange: true
+  fileTailers:
+    - name: nginx-access
+      path: /var/log/nginx/access.log
+      disabled: false
+    - name: nginx-error
+      path: /var/log/nginx/error.log
+      disabled: false
+  systemdTailers:
+    - name: my-systemd-tailer
+      disabled: false
+      maxEntries: 100
+      systemdFilter: kubelet.service
+EOF
+```
+
+
+### Configuration options
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| name | string | Yes | - | Name for the tailer<br> |
-| path | string | No |  /var/log/journal | Override systemd log path <br> |
-| systemdFilter | string | No | - | Filter to select systemd unit example: kubelet.service<br> |
-| maxEntries | int | No | - | Maximum entries to read when starting to tail logs to avoid high pressure<br> |
-| disabled | bool | No | - | Disable component<br> |
-| workloadMetaOverrides |[types.MetaBase](#metabase)| No | - | Override metadata of the created resources |
-| workloadOverrides |[types.PodSpecBase](#podspecbase)| No | - | Override podSpec fields for the given daemonset |
-| containerOverrides |[types.ContainerBase](#containerbase)| No | - | Override container fields for the given daemonset |
+| fileTailers | []FileTailer | No | - | List of file tailers<br> |
+| systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
+| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
+| controlNamespace | string | Yes | - | The resources of HostTailer will be placed into this namespace<br> |
+| workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
+| workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given daemonset<br> |
 
 ### Kubernetes Systemd tailer
 
 Tail logs from the systemd journal. Define one or more systemd tailers in the `Observer`
 configuration.
 
-### Example: configuration systemd tailer
+### Example: configuration Systemd tailer
 
 ```bash
-one-eye reconcile -f - <<EOF
-apiVersion: one-eye.banzaicloud.io/v1alpha1
-kind: Observer
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: HostTailer
 metadata:
-  name: observer
+  name: hosttailer-sample
 spec:
   controlNamespace: default
-  logging:
-    hostTailers:
-      systemdTailers:
-        - name: kubelet
-          systemdFilter: kubelet.service
+  enableRecreateWorkloadOnImmutableFieldChange: false
+  systemdTailers:
+    - name: my-systemd-tailer
+      disabled: false
+      maxEntries: 100
+      systemdFilter: kubelet.service
 EOF
 ```
 
-### Systemd Tailer configuration options
+### Systemd tailer configuration options
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | name | string | Yes | - | Name for the tailer<br> |
-| path | string | No |  /var/log/journal | Override systemd log path <br> |
+| path | string | No | - | Override systemd log path<br> |
+| disabled | bool | No | - | Disable component<br> |
 | systemdFilter | string | No | - | Filter to select systemd unit example: kubelet.service<br> |
 | maxEntries | int | No | - | Maximum entries to read when starting to tail logs to avoid high pressure<br> |
-| disabled | bool | No | - | Disable component<br> |
-| workloadMetaOverrides |[types.MetaBase](#metabase)| No | - | Override metadata of the created resources |
-| workloadOverrides |[types.PodSpecBase](#podspecbase)| No | - | Override podSpec fields for the given daemonset |
-| containerOverrides |[types.ContainerBase](#containerbase)| No | - | Override container fields for the given daemonset |
 
 ### Kubernetes Host File tailer
 
-Tail logs from the node's host filesystem. Define one or more file tailers in the `Observer`
+Tail logs from the node's host filesystem. Define one or more file tailers in the `HostTailer`
 configuration.
 
 ### Example: configuration host file tailer
 
 ```bash
-one-eye reconcile -f - <<EOF
-apiVersion: one-eye.banzaicloud.io/v1alpha1
-kind: Observer
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: HostTailer
 metadata:
-  name: observer
+  name: hosttailer-sample
 spec:
   controlNamespace: default
-  logging:
-    hostTailers:
-      fileTailers:
-        - name: audit-log
-          path: /var/log/audit.log
+  enableRecreateWorkloadOnImmutableFieldChange: true
+  fileTailers:
+    - name: nginx-access
+      path: /var/log/nginx/access.log
+      disabled: false
+    - name: nginx-error
+      path: /var/log/nginx/error.log
+      disabled: false
 EOF
 ```
 
@@ -157,13 +175,8 @@ EOF
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | name | string | Yes | - | Name for the tailer<br> |
-| path | string | No | - | Path for the file on the host<br> |
-| hostPath | string | No | - | Override the mount point for the path<br> |
-| tag | string | No | - | Override fluent tag<br> |
-| disabled | bool | No | - | Disable component<br> |
-| workloadMetaOverrides |[types.MetaBase](#metabase)| No | - | Override metadata of the created resources |
-| workloadOverrides |[types.PodSpecBase](#podspecbase)| No | - | Override podSpec fields for the given daemonset |
-| containerOverrides |[types.ContainerBase](#containerbase)| No | - | Override container fields for the given daemonset |
+| path | string | No | - | Path to the loggable file<br> |
+| disabled | bool | No | - | Disable tailing the file<br> |
 
 ### Advanced configuration overrides
 
