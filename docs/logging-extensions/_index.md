@@ -284,7 +284,6 @@ EOF
 | controlNamespace | string | Yes | - | The resources of HostTailer will be placed into this namespace<br> |
 | workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
 | workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
-| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given daemonset<br> |
 
 ### Example: Configure logging Flow with explicit exclusion
 
