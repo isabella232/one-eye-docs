@@ -266,8 +266,6 @@ spec:
       disabled: false
     - name: nginx-error
       path: /var/log/nginx/error.log
-      # currently unwanted
-      disabled: true
   # list of Systemd tailers
   systemdTailers:
     - name: my-systemd-tailer
