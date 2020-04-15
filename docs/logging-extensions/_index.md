@@ -268,7 +268,6 @@ spec:
   # list of Systemd tailers
   systemdTailers:
     - name: my-systemd-tailer
-      disabled: false
       maxEntries: 100
       systemdFilter: kubelet.service
 EOF
