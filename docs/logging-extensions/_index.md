@@ -257,10 +257,6 @@ kind: HostTailer
 metadata:
   name: multi-sample
 spec:
-  # resources will be placed in default namespace
-  controlNamespace: default
-  # recreate resources when it's unable to change a field due to immutable status
-  enableRecreateWorkloadOnImmutableFieldChange: true
   # list of File tailers
   fileTailers:
     - name: nginx-access
@@ -283,7 +279,6 @@ EOF
 | fileTailers | []FileTailer | No | - | List of file tailers<br> |
 | systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
 | enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
-| controlNamespace | string | Yes | - | The resources of HostTailer will be placed into this namespace<br> |
 | workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
 | workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
 
