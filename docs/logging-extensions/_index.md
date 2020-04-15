@@ -263,7 +263,6 @@ spec:
   fileTailers:
     - name: nginx-access
       path: /var/log/nginx/access.log
-      disabled: false
     - name: nginx-error
       path: /var/log/nginx/error.log
   # list of Systemd tailers
