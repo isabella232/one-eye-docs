@@ -32,4 +32,4 @@ $ brew install banzaicloud/tap/one-eye
 
 ## Next steps
 
-* [One Eye Command Reference](../reference)	
+* [One Eye Command Reference](../reference/)	

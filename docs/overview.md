@@ -13,6 +13,6 @@ Built on Prometheus, Thanos, Grafana, Loki, fluentd, and fluentbit. Managed by t
 
 ### Next steps
 
-- [Jump to the installation section](../cli/install)
+- [Jump to the installation section](../cli/install/)
 - [View One Eye related blogposts](/tags/observability/)
 - [Schedule a demo]({{< relref "/contact/_index.md" >}})
