@@ -30,7 +30,7 @@ kubectl apply -f - <<EOF
 apiVersion: logging-extensions.banzaicloud.io/v1alpha1
 kind: EventTailer
 metadata:
-  name: sample-eventtailer
+  name: sample
 spec:
   controlNamespace: default
 EOF
@@ -43,7 +43,7 @@ kubectl apply -f - <<EOF
 apiVersion: logging-extensions.banzaicloud.io/v1alpha1
 kind: EventTailer
 metadata:
-  name: sample-eventtailer
+  name: sample
 spec:
   controlNamespace: default
   positionVolume:
@@ -61,54 +61,38 @@ EOF
 ### Configuration options
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| controlNamespace | string | Yes | - | The resources of EventTailer will be placed into this namespace<br> |
+| controlNamespace | string | Yes | - | The resources of Eventtailer will be placed into this namespace<br> |
 | positionVolume | volume.KubernetesVolume | No | - | Volume definition for tracking fluentbit file positions (optional)<br> |
 | workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
 | workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given statefulset<br> |
-| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given statefulset<br> |
+
+### Example: Configure logging Flow to route logs from an event tailer
+
+The following example configures a flow to route the previously created `sample-eventtailer` EventTailer's log. 
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: eventtailer-flow
+  namespace: default
+spec:
+  filters:
+  - tag_normaliser: {}
+  match:
+  # keeps data matching to label, the rest of the data will be discarded by this flow implicitly
+  - select:
+      labels:
+        app.kubernetes.io/name: sample-event-tailer
+  outputRefs:
+    - sample-output
+EOF
+```
 
 ## Kubernetes Host Tailers
 
 Tailing logs from the nodes like `kubelet`, `audit` logs or from the `systemd` journal.
-
-### Example: configuration Kubernetes host tailer with multiple tailers
-
-```bash
-kubectl apply -f - <<EOF
-apiVersion: logging-extensions.banzaicloud.io/v1alpha1
-kind: HostTailer
-metadata:
-  name: hosttailer-sample
-spec:
-  controlNamespace: default
-  enableRecreateWorkloadOnImmutableFieldChange: true
-  fileTailers:
-    - name: nginx-access
-      path: /var/log/nginx/access.log
-      disabled: false
-    - name: nginx-error
-      path: /var/log/nginx/error.log
-      disabled: false
-  systemdTailers:
-    - name: my-systemd-tailer
-      disabled: false
-      maxEntries: 100
-      systemdFilter: kubelet.service
-EOF
-```
-
-
-### Configuration options
-
-| Variable Name | Type | Required | Default | Description |
-|---|---|---|---|---|
-| fileTailers | []FileTailer | No | - | List of file tailers<br> |
-| systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
-| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
-| controlNamespace | string | Yes | - | The resources of HostTailer will be placed into this namespace<br> |
-| workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
-| workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
-| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given daemonset<br> |
 
 ### Kubernetes Systemd tailer
 
@@ -122,10 +106,8 @@ kubectl apply -f - <<EOF
 apiVersion: logging-extensions.banzaicloud.io/v1alpha1
 kind: HostTailer
 metadata:
-  name: hosttailer-sample
+  name: systemd-hosttailer-sample
 spec:
-  controlNamespace: default
-  enableRecreateWorkloadOnImmutableFieldChange: false
   systemdTailers:
     - name: my-systemd-tailer
       disabled: false
@@ -143,29 +125,25 @@ EOF
 | disabled | bool | No | - | Disable component<br> |
 | systemdFilter | string | No | - | Filter to select systemd unit example: kubelet.service<br> |
 | maxEntries | int | No | - | Maximum entries to read when starting to tail logs to avoid high pressure<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |
 
 ### Kubernetes Host File tailer
 
 Tail logs from the node's host filesystem. Define one or more file tailers in the `HostTailer`
 configuration.
 
-### Example: configuration host file tailer
+### Example: configuration host File Tailer
 
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: logging-extensions.banzaicloud.io/v1alpha1
 kind: HostTailer
 metadata:
-  name: hosttailer-sample
+  name: file-hosttailer-sample
 spec:
-  controlNamespace: default
-  enableRecreateWorkloadOnImmutableFieldChange: true
   fileTailers:
     - name: nginx-access
       path: /var/log/nginx/access.log
-      disabled: false
-    - name: nginx-error
-      path: /var/log/nginx/error.log
       disabled: false
 EOF
 ```
@@ -177,6 +155,68 @@ EOF
 | name | string | Yes | - | Name for the tailer<br> |
 | path | string | No | - | Path to the loggable file<br> |
 | disabled | bool | No | - | Disable tailing the file<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |
+
+### Example: Configure logging Flow to route logs from a Hosttailer
+
+The following example uses the flow's match term to listen the previously created `file-hosttailer-sample` Hosttailer's log. 
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: hosttailer-flow
+  namespace: default
+spec:
+  filters:
+  - tag_normaliser: {}
+  # keeps data matching to label, the rest of the data will be discarded by this flow implicitly
+  match:
+  - select:
+      labels: 
+        app.kubernetes.io/name: file-hosttailer-sample
+      # there might be a need to match on container name too (in case of multiple containers)
+      container_names:
+        - nginx-access
+  outputRefs:
+    - sample-output
+EOF
+```
+
+### Example: configuration Kubernetes host tailer with multiple tailers
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: HostTailer
+metadata:
+  name: multi-sample
+spec:
+  # list of File tailers
+  fileTailers:
+    - name: nginx-access
+      path: /var/log/nginx/access.log
+    - name: nginx-error
+      path: /var/log/nginx/error.log
+  # list of Systemd tailers
+  systemdTailers:
+    - name: my-systemd-tailer
+      maxEntries: 100
+      systemdFilter: kubelet.service
+EOF
+```
+
+
+### Configuration options
+
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| fileTailers | []FileTailer | No | - | List of file tailers<br> |
+| systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
+| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
+| workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
+| workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
 
 ### Advanced configuration overrides
 
