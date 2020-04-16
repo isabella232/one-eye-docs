@@ -17,10 +17,13 @@ one-eye logging install [flags]
 ### Options
 
 ```
-  -h, --help                    help for install
-      --operator-image string   override operator image (default "banzaicloud/logging-operator:3.1.0-rc1")
-      --prometheus              install prometheus and grafana using prometheus operator
-      --update                  update observer configuration
+      --enable-filetailer-webhook          enabled the file tailer webhook extension (requires CertManager >= v0.11.0)
+      --extensions-operator-image string   override extensions operator image
+  -h, --help                               help for install
+      --operator-image string              override operator image
+      --prometheus                         install prometheus and grafana using prometheus operator
+      --pull                               always pull operator images
+      --update                             update observer configuration
 ```
 
 ### Options inherited from parent commands

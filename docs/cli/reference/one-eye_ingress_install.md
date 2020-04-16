@@ -21,7 +21,8 @@ one-eye ingress install [flags]
   -h, --help                    help for install
       --host string             ingress domain name (default "localhost")
       --prometheus-url string   override prometheus URL
-      --ui-image string         override ui image (default "banzaicloud/one-eye-ui:master")
+      --pull                    always pull the UI image
+      --ui-image string         UI image
       --update                  update observer configuration
 ```
 
