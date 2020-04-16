@@ -1,3 +1,8 @@
+---
+title: Command reference
+shortTitle: Reference
+weight: 30
+---		
 # Available Types
 
 For more information please click on the name
