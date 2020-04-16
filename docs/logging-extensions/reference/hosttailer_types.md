@@ -1,3 +1,8 @@
+---
+title: HostTailer
+weight: 200
+---
+
 ### HostTailerSpec
 #### HostTailerSpec defines the desired state of HostTailer
 
@@ -5,11 +10,9 @@
 |---|---|---|---|---|
 | fileTailers | []FileTailer | No | - | List of file tailers<br> |
 | systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
-| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
-| controlNamespace | string | Yes | - | The resources of HostTailer will be placed into this namespace<br> |
+| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>daemonset (and possibly other resource in the future) in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
 | workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
 | workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
-| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given daemonset<br> |
 ### HostTailerStatus
 #### HostTailerStatus defines the observed state of HostTailer
 
@@ -40,6 +43,7 @@
 | name | string | Yes | - | Name for the tailer<br> |
 | path | string | No | - | Path to the loggable file<br> |
 | disabled | bool | No | - | Disable tailing the file<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |
 ### SystemdTailer
 #### SystemdTailer configuration options
 
@@ -50,3 +54,4 @@
 | disabled | bool | No | - | Disable component<br> |
 | systemdFilter | string | No | - | Filter to select systemd unit example: kubelet.service<br> |
 | maxEntries | int | No | - | Maximum entries to read when starting to tail logs to avoid high pressure<br> |
+| containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |

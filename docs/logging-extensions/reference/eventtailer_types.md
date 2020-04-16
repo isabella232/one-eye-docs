@@ -1,4 +1,7 @@
-
+---
+title: EventTailer
+weight: 200
+---
 
 ### EventTailerSpec
 #### EventTailerSpec defines the desired state of EventTailer
