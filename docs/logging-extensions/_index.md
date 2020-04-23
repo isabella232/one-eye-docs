@@ -156,7 +156,6 @@ EOF
 | path | string | No | - | Path to the loggable file<br> |
 | disabled | bool | No | - | Disable tailing the file<br> |
 | containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |
-<<<<<<< HEAD
 
 ### Example: Configure logging Flow to route logs from a Hosttailer
 
@@ -218,8 +217,6 @@ EOF
 | enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
 | workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
 | workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
-=======
->>>>>>> review suggestions fixes
 
 ### Example: Configure logging Flow to route logs from a Hosttailer
 
