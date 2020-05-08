@@ -1,0 +1,49 @@
+version: 2.1
+
+parameters:
+  remote-trigger:
+    type: boolean
+    default: false
+  project:
+    type: string
+    default: ""
+  release-tag:
+    type: string
+    default: ""
+  build-dir:
+    type: string
+    default: ""
+  target-dir:
+    type: string
+    default: ""
+
+commands:
+  setup-git-user:
+    steps:
+      - run:
+          command: |
+            git config --global user.email "circleci@circleci.com"
+            git config --global user.name "CircleCI"
+
+jobs:
+  generate-docs:
+    docker:
+      - image: cimg/go:1.13
+    steps:
+      - checkout
+      - setup-git-user
+      - run:
+          name: Update CLI docs
+          command: |
+            scripts/update-generated-docs.sh \
+              "<<pipeline.parameters.project>>" \
+              "<<pipeline.parameters.release-tag>>" \
+              "<<pipeline.parameters.build-dir>>" \
+              "<<pipeline.parameters.target-dir>>"
+
+workflows:
+  cli-docgen:
+    when: << pipeline.parameters.project >>
+    jobs:
+      - generate-docs:
+          context: Default
