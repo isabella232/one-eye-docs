@@ -3,8 +3,10 @@
 set -eux
 
 ROOT="$(git rev-parse --show-toplevel)"
-PROJECT=logging-extensions
-RELEASE_TAG="$1"
+PROJECT="$1"
+RELEASE_TAG="$2"
+BUILD_DIR="$3"
+TARGET_DIR="$4"
 BRANCH="update-generated-docs-${PROJECT}-${RELEASE_TAG}"
 
 function cleanup {
@@ -15,15 +17,14 @@ trap cleanup EXIT
 function update_docs()
 {
   mkdir -p ${ROOT}/tmp
-  git clone --depth 1 -b "${RELEASE_TAG}" "git@github.com:banzaicloud/${PROJECT}.git" "${ROOT}/tmp/${PROJECT}"
+  git clone --depth 1 -b "${RELEASE_TAG}" "https://github.com/banzaicloud/${PROJECT}.git" "${ROOT}/tmp/${PROJECT}"
   cd "${ROOT}/tmp/${PROJECT}/"
-  rm -rf ./cmd/docs/*.md
   make docs
-  echo $PWD
-  mkdir -p "${ROOT}/docs/${PROJECT}/reference/"
-  cp $PWD/docs/types/*.md "${ROOT}/docs/${PROJECT}/reference/"
-  cd -
-  rm -rf ${ROOT}/tmp
+  mkdir -p "${ROOT}/${TARGET_DIR}"
+  find "${ROOT}/${TARGET_DIR}" -type f -not -name '_index.md' -delete
+  find "${ROOT}/tmp/${PROJECT}/${BUILD_DIR}" -name '*.md' -exec cp {} "${ROOT}/${TARGET_DIR}" \;
+  cd ${ROOT}
+  rm -rf tmp
 }
 
 function main()
@@ -36,7 +37,6 @@ function main()
     git checkout master
     git merge "${BRANCH}"
     git push origin master
-    echo "Commit has changed."
   else
     echo "Nothing has changed."
     circleci-agent step halt
