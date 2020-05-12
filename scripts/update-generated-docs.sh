@@ -17,7 +17,7 @@ trap cleanup EXIT
 function update_docs()
 {
   mkdir -p ${ROOT}/tmp
-  git clone --depth 1 -b "${RELEASE_TAG}" "git@github.com:banzaicloud/${PROJECT}.git" "${ROOT}/tmp/${PROJECT}"
+  git clone --depth 1 -b "${RELEASE_TAG}" "https://github.com/banzaicloud/${PROJECT}.git" "${ROOT}/tmp/${PROJECT}"
   cd "${ROOT}/tmp/${PROJECT}/"
   make docs
   mkdir -p "${ROOT}/${TARGET_DIR}"

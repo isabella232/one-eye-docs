@@ -18,10 +18,14 @@ parameters:
     default: ""
 
 commands:
-  setup-git-user:
+  setup-git:
     steps:
       - run:
+          name: Setup git
           command: |
+            git config --global --remove-section "url.ssh://git@github.com"
+            git config --global url."https://${GITHUB_TOKEN}:@github.com/".insteadOf "https://github.com/"
+            git remote set-url origin "https://${GITHUB_TOKEN}:@github.com/banzaicloud/one-eye-docs"
             git config --global user.email "circleci@circleci.com"
             git config --global user.name "CircleCI"
 
@@ -29,9 +33,10 @@ jobs:
   generate-docs:
     docker:
       - image: cimg/go:1.13
+    resource_class: small
     steps:
       - checkout
-      - setup-git-user
+      - setup-git
       - run:
           name: Update CLI docs
           command: |
