@@ -13,7 +13,7 @@ function main()
         -d "{
             \"branch\": \"gh-pages\",
             \"parameters\": {
-                \"module\": \"one-eye\"
+                \"module\": \"one-eye-docs\"
             }
         }" "https://circleci.com/api/v2/project/${PROJECT_SLUG}/pipeline"
 }

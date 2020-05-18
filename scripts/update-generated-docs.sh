@@ -52,6 +52,26 @@ function copy_docs()
   find "${ROOT}/tmp/${PROJECT}/${BUILD_DIR}/${source_dir}" -name '*.md' -exec cp {} "${ROOT}/${target_dir}" \;
 }
 
+function create_pr()
+{
+  local title="$1"
+  local body="$2"
+  local branch="$3"
+
+  curl \
+    -sS \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -H "Authorization: token ${GITHUB_TOKEN}" \
+    -d "{
+      \"title\": \"${title}\",
+      \"head\": \"${branch}\",
+      \"base\": \"master\",
+      \"body\": \"${body}\",
+      \"maintainer_can_modify\": true
+    }" 'https://api.github.com/repos/banzaicloud/one-eye-docs/pulls'
+}
+
 function main()
 {
   git checkout -b "${BRANCH}"
@@ -59,9 +79,8 @@ function main()
   git add --all
   if git commit --dry-run; then
     git commit -m "Update generated docs (${PROJECT}-${RELEASE_TAG})"
-    git checkout master
-    git merge "${BRANCH}"
-    git push origin master
+    git push origin "${BRANCH}"
+    create_pr "Update ${PROJECT} generated docs" "Update ${PROJECT} generated docs to ${RELEASE_TAG}" "${BRANCH}"
   else
     echo "Nothing has changed."
     circleci-agent step halt
