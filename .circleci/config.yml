@@ -13,9 +13,6 @@ parameters:
   build-dir:
     type: string
     default: ""
-  target-dir:
-    type: string
-    default: ""
 
 commands:
   setup-git:
@@ -43,8 +40,7 @@ jobs:
             scripts/update-generated-docs.sh \
               "<<pipeline.parameters.project>>" \
               "<<pipeline.parameters.release-tag>>" \
-              "<<pipeline.parameters.build-dir>>" \
-              "<<pipeline.parameters.target-dir>>"
+              "<<pipeline.parameters.build-dir>>"
 
 workflows:
   cli-docgen:

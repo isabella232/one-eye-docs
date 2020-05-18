@@ -6,7 +6,6 @@ ROOT="$(git rev-parse --show-toplevel)"
 PROJECT="$1"
 RELEASE_TAG="$2"
 BUILD_DIR="$3"
-TARGET_DIR="$4"
 BRANCH="update-generated-docs-${PROJECT}-${RELEASE_TAG}"
 
 function cleanup {
@@ -16,15 +15,41 @@ trap cleanup EXIT
 
 function update_docs()
 {
+  checkout_source
+  make docs
+
+  case "${PROJECT}" in
+    one-eye)
+      copy_docs 'cli/reference/' 'docs/cli/reference/'
+      copy_docs 'crds/' 'docs/crds/'
+      ;;
+    logging-extensions)
+      copy_docs '.' 'docs/logging-extensions/reference/'
+      ;;
+    *)
+      echo 'Unknown project'
+      exit 1
+  esac
+
+  cd ${ROOT}
+  rm -rf tmp
+}
+
+function checkout_source()
+{
   mkdir -p ${ROOT}/tmp
   git clone --depth 1 -b "${RELEASE_TAG}" "https://github.com/banzaicloud/${PROJECT}.git" "${ROOT}/tmp/${PROJECT}"
   cd "${ROOT}/tmp/${PROJECT}/"
-  make docs
-  mkdir -p "${ROOT}/${TARGET_DIR}"
-  find "${ROOT}/${TARGET_DIR}" -type f -not -name '_index.md' -delete
-  find "${ROOT}/tmp/${PROJECT}/${BUILD_DIR}" -name '*.md' -exec cp {} "${ROOT}/${TARGET_DIR}" \;
-  cd ${ROOT}
-  rm -rf tmp
+}
+
+function copy_docs()
+{
+  local source_dir="$1"
+  local target_dir="$2"
+
+  mkdir -p "${ROOT}/${target_dir}"
+  find "${ROOT}/${target_dir}" -type f -not -name '_index.md' -delete
+  find "${ROOT}/tmp/${PROJECT}/${BUILD_DIR}/${source_dir}" -name '*.md' -exec cp {} "${ROOT}/${target_dir}" \;
 }
 
 function main()
