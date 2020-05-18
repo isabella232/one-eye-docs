@@ -19,7 +19,7 @@ The **MENU > WORKLOADS** page contains information about the workloads your logg
 
 Click on the name of a workload to display its details.
 
-From the details overview, you can drill down through the following levels to the underlying resources of the infrastructure: [Overview](#workload-overview) > [Controller](#controller) > [Pod](#pod) > [Node](#node)
+From the details overview, you can drill down through the following levels to the underlying resources of the infrastructure: [Overview](#workload-overview) > Controller > [Pod](#pod) > [Node](#node)
 
 ![Details of a workload](workload-list.png)
 
@@ -31,7 +31,7 @@ Select a Workload from the list to display its details.
 
 The following details of the workload are displayed:
 
-- **Controller**: The controllers related to the workload. Click on a [controller to display its details](#controller).
+- **Controller**: The controllers related to the workload. Click on a controller to display its details.
 - **NAMESPACE**: The namespace the workload belongs to.
 - **CLUSTER**: The name of the Kubernetes cluster the workload belongs to.
 - **KIND**: The kind of the workload, for example, DaemonSet, Deployment, ReplicaSet, or StatefulSet.

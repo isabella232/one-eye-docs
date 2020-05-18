@@ -127,7 +127,7 @@ EOF
 | maxEntries | int | No | - | Maximum entries to read when starting to tail logs to avoid high pressure<br> |
 | containerOverrides | *types.ContainerBase | No | - | Override container fields for the given tailer<br> |
 
-### Kubernetes Host File tailer
+### Kubernetes Host File tailer {#host-file-tailer}
 
 Tail logs from the node's host filesystem. Define one or more file tailers in the `HostTailer`
 configuration.
