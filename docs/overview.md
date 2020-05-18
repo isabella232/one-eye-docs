@@ -9,7 +9,7 @@ Banzai Cloud One Eye provides scalable, unified, and automated log and metric co
 
 What's more, Banzai Cloud One Eye natively supports multi-cluster and hybrid-cluster scenarios, and gives your teams a single location to query and analyze all the collected data, no matter if they need it for devops, maintenance, or compliance reasons.
 
-Built on Prometheus, Thanos, Grafana, Loki, fluentd, and fluentbit. Managed by the Banzai Cloud Logging operator and Banzai Cloud Thanos operator.
+Built on Prometheus, Thanos, Grafana, Loki, Fluentd, and Fluent Bit. Managed by the Banzai Cloud Logging operator and Banzai Cloud Thanos operator.
 
 ### Next steps
 
