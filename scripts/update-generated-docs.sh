@@ -6,7 +6,7 @@ ROOT="$(git rev-parse --show-toplevel)"
 PROJECT="$1"
 RELEASE_TAG="$2"
 BUILD_DIR="$3"
-BRANCH="update-generated-docs-${PROJECT}-${RELEASE_TAG}"
+BRANCH="${PROJECT}-${RELEASE_TAG}-$(date '+%F-%H-%M')"
 
 function cleanup {
   rm -rf ${ROOT}/tmp
