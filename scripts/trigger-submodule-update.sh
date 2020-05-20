@@ -13,7 +13,8 @@ function main()
         -d "{
             \"branch\": \"gh-pages\",
             \"parameters\": {
-                \"module\": \"one-eye-docs\"
+                \"module\": \"one-eye-docs\",
+                \"remote-trigger\": true
             }
         }" "https://circleci.com/api/v2/project/${PROJECT_SLUG}/pipeline"
 }

@@ -59,6 +59,9 @@ workflows:
       - generate-docs:
           context: Default
 
+  submodule-update-on-main-site:
+    unless: << pipeline.parameters.remote-trigger >>
+    jobs:
       - trigger-submodule-update:
           filters:
             branches:
