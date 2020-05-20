@@ -29,5 +29,6 @@ Manage ingress for one-eye
 
 * [one-eye](/docs/one-eye/cli/reference/one-eye/)	 - one-eye cli
 * [one-eye ingress connect](/docs/one-eye/cli/reference/one-eye_ingress_connect/)	 - Connect to the main ingress endpoint
+* [one-eye ingress delete](/docs/one-eye/cli/reference/one-eye_ingress_delete/)	 - Delete ingress for one-eye
 * [one-eye ingress install](/docs/one-eye/cli/reference/one-eye_ingress_install/)	 - Install ingress for one-eye
 

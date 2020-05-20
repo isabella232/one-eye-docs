@@ -13,9 +13,6 @@ parameters:
   build-dir:
     type: string
     default: ""
-  target-dir:
-    type: string
-    default: ""
 
 commands:
   setup-git:
@@ -43,8 +40,17 @@ jobs:
             scripts/update-generated-docs.sh \
               "<<pipeline.parameters.project>>" \
               "<<pipeline.parameters.release-tag>>" \
-              "<<pipeline.parameters.build-dir>>" \
-              "<<pipeline.parameters.target-dir>>"
+              "<<pipeline.parameters.build-dir>>"
+
+  trigger-submodule-update:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Trigger
+          command: scripts/trigger-submodule-update.sh
 
 workflows:
   cli-docgen:
@@ -52,3 +58,8 @@ workflows:
     jobs:
       - generate-docs:
           context: Default
+
+      - trigger-submodule-update:
+          filters:
+            branches:
+              only: master
