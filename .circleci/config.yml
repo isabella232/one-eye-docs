@@ -59,6 +59,8 @@ workflows:
       - generate-docs:
           context: Default
 
+  submodule-update-on-main-site:
+    jobs:
       - trigger-submodule-update:
           filters:
             branches:
