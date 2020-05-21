@@ -7,7 +7,7 @@ weight: 1000
 
 ### Introduction
 
-Another way to keep your custom file's content tailed aside of [`host file tailer`](./_index#Kubernetes-Host-File-Tailer) service, to configure and use the `file tailer webhook` service.
+Another way to keep your custom file's content tailed aside of [`host file tailer`](../#host-file-tailer) service, to configure and use the `file tailer webhook` service.
 While the containers of the `host file tailers` run in a separated pod, `file tailer webhook` uses a different approach, it injects a sidecar container for every tailed file into your pod, triggered by a simple pod annotation.
 
 ---
