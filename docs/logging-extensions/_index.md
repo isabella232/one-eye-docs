@@ -275,7 +275,7 @@ Create your own custom priority class in Kubernetes. Set its value between 0 and
 >* 0 is the default priority
 >* To change the default priority, set the `globalDefault` key
 >* 2000000000 and above are reserved for kubernetes system
->* it's a non-namespaced object
+>* PriorityClass is a non-namespaced object
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: scheduling.k8s.io/v1
