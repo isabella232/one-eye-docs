@@ -16,6 +16,7 @@ weight: 200
 |---|---|---|---|---|
 | operator | *loggingOperator.ComponentConfig | No | - | Operator config descriptor<br> |
 | extensions | *loggingExtensions.ComponentConfig | No | - | Extensions config descriptor<br> |
+| tls | bool | No | - | TLS flag<br> |
 ### Prometheus
 #### Prometheus component
 
@@ -38,6 +39,19 @@ weight: 200
 | certManagerOperatorChart | *CertManagerOperatorChart | No | - | Descriptor for Helm Chart installer of Cert-Manager<br> |
 ### CertManagerOperatorChart
 #### Descriptor for Helm Chart installer of Cert-Manager
+
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| disabled | bool | No | - | Disabled status<br> |
+| values | string | No | - | Helm Chart values<br> |
+### Loki
+#### Loki component
+
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| lokiOperatorChart | *LokiOperatorChart | No | - | Descriptor for Helm Chart installer of Loki<br> |
+### LokiOperatorChart
+#### Descriptor for Helm Chart installer of Loki
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|

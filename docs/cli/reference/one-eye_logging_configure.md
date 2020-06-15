@@ -20,6 +20,7 @@ one-eye logging configure [flow|clusterflow|output|clusteroutput] [flags]
   -h, --help             help for configure
       --logging string   name of the logging resource to be created (default "one-eye")
       --path string      directory to save generated resource configs (default ".")
+      --secure           configure secure connection between fluentbit and fluentd (cert-manager required)
 ```
 
 ### Options inherited from parent commands

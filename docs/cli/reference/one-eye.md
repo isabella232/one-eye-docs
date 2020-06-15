@@ -26,6 +26,7 @@ one-eye cli
 * [one-eye ingress](/docs/one-eye/cli/reference/one-eye_ingress/)	 - Manage ingress for one-eye
 * [one-eye license](/docs/one-eye/cli/reference/one-eye_license/)	 - Show Evaluation License
 * [one-eye logging](/docs/one-eye/cli/reference/one-eye_logging/)	 - Manage the logging components
+* [one-eye loki](/docs/one-eye/cli/reference/one-eye_loki/)	 - Manage the loki chart
 * [one-eye prometheus](/docs/one-eye/cli/reference/one-eye_prometheus/)	 - Manage the prometheus-operator chart
 * [one-eye reconcile](/docs/one-eye/cli/reference/one-eye_reconcile/)	 - Reconcile all components of an Observer
 * [one-eye removeall](/docs/one-eye/cli/reference/one-eye_removeall/)	 - Removes all previously installed operators

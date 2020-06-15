@@ -12,6 +12,7 @@ weight: 200
 | logging | Logging | No | - | Logging component descriptor<br> |
 | prometheus | Prometheus | No | - | Prometheus component descriptor<br> |
 | certmanager | CertManager | No | - | CertManager component descriptor<br> |
+| loki | Loki | No | - | Loki component descriptor<br> |
 | ingress | Ingress | No | - | Ingress component descriptor<br> |
 | controlNamespace | string | Yes | - | Observer will be placed into this namespace<br> |
 ### ObserverStatus
