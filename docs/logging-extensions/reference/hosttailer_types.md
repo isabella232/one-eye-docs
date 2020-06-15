@@ -1,6 +1,7 @@
 ---
 title: HostTailer
 weight: 200
+generated_file: true
 ---
 
 ### HostTailerSpec

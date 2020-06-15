@@ -1,8 +1,9 @@
 ---
-title: Command reference
+title: Api reference
 shortTitle: Reference
+generated_file: true
 weight: 30
----		
+---
 # Available Types
 
 For more information please click on the name
