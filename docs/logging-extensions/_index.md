@@ -270,7 +270,7 @@ EOF
 
 ### Example: Setting up custom priority
 
-Create your own custom priority class in kubernetes. Set its value between 0 and 2000000000.
+Create your own custom priority class in Kubernetes. Set its value between 0 and 2000000000.
 >Priority Hints:
 >* 0 is the default
 >* You can change default with setting the key `globalDefault`
