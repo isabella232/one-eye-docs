@@ -20,7 +20,7 @@ There are three possible ways to do this:
 * provide valid secrets and ca bundle by your own
 
 #### Install with cert-manager:
-[`One-eye`](https://banzaicloud.com/products/one-eye/) offers a [`cert-manager`](https://cert-manager.io/) installation.We belive that the `cert-manager` is a powerful tool, so we strongly recommend to use it.
+[`One-eye`](https://banzaicloud.com/products/one-eye/) offers a [`cert-manager`](https://cert-manager.io/) installation. The `cert-manager` is a powerful tool, so we strongly recommend to use it.
 
 First install cert-manager:
 ```bash
