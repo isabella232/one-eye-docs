@@ -272,7 +272,7 @@ EOF
 
 Create your own custom priority class in Kubernetes. Set its value between 0 and 2000000000.
 >Priority Hints:
->* 0 is the default
+>* 0 is the default priority
 >* You can change default with setting the key `globalDefault`
 >* 2000000000 and above are reserved for kubernetes system
 >* it's a non-namespaced object
