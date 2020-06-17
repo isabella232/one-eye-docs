@@ -268,6 +268,46 @@ spec:
 EOF
 ```
 
+### Example: Setting up custom priority
+
+Create your own custom priority class in Kubernetes. Set its value between 0 and 2000000000.
+>Priority Hints:
+>* 0 is the default priority
+>* To change the default priority, set the `globalDefault` key
+>* 2000000000 and above are reserved for kubernetes system
+>* PriorityClass is a non-namespaced object
+```bash
+kubectl apply -f - <<EOF
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: hosttailer-priority
+value: 1000000
+globalDefault: false
+description: "This priority class should be used for hosttailer pods only."
+EOF
+```
+
+Now you can use your private priority class name to start hosttailer/eventtailer as it shown below:
+
+```bash
+kubectl apply -f -<<EOF
+apiVersion: logging-extensions.banzaicloud.io/v1alpha1
+kind: HostTailer
+metadata:
+  name: priority-sample
+spec:
+  controlNamespace: default
+  # Override podSpecBase variables here
+  workloadOverrides:
+    priorityClassName: hosttailer-priority
+  fileTailers:
+    - name: nginx-access
+      path: /var/log/nginx/access.log
+    - name: nginx-error
+      path: /var/log/nginx/error.log
+EOF
+```
 
 ### Configuration options
 
@@ -298,6 +338,7 @@ EOF
 | affinity | `*corev1.Affinity` | No | - |  |
 | securityContext | `*corev1.PodSecurityContext` | No | - |  |
 | volumes | `[]corev1.Volume` | No | - |  |
+| priorityClassName | `string` | No | - |  |
 
 ### ContainerBase
 

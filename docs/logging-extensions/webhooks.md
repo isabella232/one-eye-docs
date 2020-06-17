@@ -20,23 +20,27 @@ There are three possible ways to do this:
 * provide valid secrets and ca bundle by your own
 
 #### Install with cert-manager:
-[`One-eye`](https://banzaicloud.com/products/one-eye/) offers a [`cert-manager`](https://cert-manager.io/) installation with `file tailer webhook` by default. We belive that the `cert-manager` is a powerful tool, so we strongly recommend to use it.
+[`One-eye`](https://banzaicloud.com/products/one-eye/) offers a [`cert-manager`](https://cert-manager.io/) installation. The `cert-manager` is a powerful tool, so we strongly recommend to use it.
+
+First install cert-manager:
 ```bash
-one-eye-cli logging install --enable-filetailer-webhook
+one-eye-cli cert-manager install
 ```
 
-#### Install without cert-manager:
-You can skip the default `cert-manager` installation process by extending the installation parameters with: 
+Then you can install the webhook support:
 ```bash
-one-eye-cli logging install --enable-filetailer-webhook --no-cert-manager
+one-eye-cli tailer-webhook install
 ```
+
 > Hints:
+> * When there is a `cert-manager` on your cluster already, you can skip the cert-manager installation step, and you can use the existing one.
 > * If there is no existing `cert-manager` on your cluster, and there won't be secret and cabundle parameters provided, the install will fail.
 
 #### Provide your own secrets:
-When you have your own certifications set up, you can pass them to the installer to configure `file tailer webhook` to use them. In this case there is no need to use `cert-manager`, so the required arguments are the following:
+When you have your own certifications set up, you can pass them to the installer to configure `file tailer webhook` to use them. In this case there is no need to use `cert-manager`. 
+The required arguments are the following:
 ```bash
-one-eye-cli logging install --enable-filetailer-webhook --no-cert-manager --webhook-secret <secret name> --webhook-cabundle <CA bundle>
+one-eye-cli tailer-webhook install --webhook-secret <secret name> --webhook-cabundle <CA bundle>
 ```
 
 ###### Example:
@@ -60,7 +64,7 @@ EOF
 
 3. Install logging with your secret name and rootCA information provided
 ```bash
-one-eye-cli logging install --namespace ${namespace} --enable-filetailer-webhook --no-cert-manager --webhook-secret "my-own-certs" --webhook-cabundle "$(cat /tmp/rootCA.pem)"
+one-eye-cli tailer-webhook install --namespace ${namespace} --webhook-secret "my-own-certs" --webhook-cabundle "$(cat /tmp/rootCA.pem)"
 ```
 
 > Hints:
