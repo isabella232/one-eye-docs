@@ -20,6 +20,7 @@ one-eye ingress install [flags]
       --disable-ui              disable one-eye web interface
   -h, --help                    help for install
       --host string             ingress domain name (default "localhost")
+      --loki-url string         override loki URL
       --prometheus-url string   override prometheus URL
       --pull                    always pull the UI image
       --ui-image string         UI image

@@ -1,6 +1,7 @@
 ---
 title: Observer
 weight: 200
+generated_file: true
 ---
 
 ### ObserverSpec
