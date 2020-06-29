@@ -1,6 +1,7 @@
 ---
 title: Components
 weight: 200
+generated_file: true
 ---
 
 ### Thanos

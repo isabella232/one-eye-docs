@@ -30,6 +30,7 @@ Manage the logging components
 * [one-eye](/docs/one-eye/cli/reference/one-eye/)	 - one-eye cli
 * [one-eye logging configure](/docs/one-eye/cli/reference/one-eye_logging_configure/)	 - Configure the logging system managed by the Logging Operator
 * [one-eye logging delete](/docs/one-eye/cli/reference/one-eye_logging_delete/)	 - Delete a previously installed Logging Operator
+* [one-eye logging fluentd](/docs/one-eye/cli/reference/one-eye_logging_fluentd/)	 - Access the fluentd specific commands
 * [one-eye logging install](/docs/one-eye/cli/reference/one-eye_logging_install/)	 - Install the Logging Operator
 * [one-eye logging versions](/docs/one-eye/cli/reference/one-eye_logging_versions/)	 - show default operator versions
 
