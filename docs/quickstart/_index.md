@@ -57,7 +57,7 @@ After you have completed the [Prerequisites](#prerequisites), you can install On
 1. Wait a few minutes and verify that the components are installed.
 
     ```bash
-    $ get po
+    $ kubectl get po
     NAME                                                             READY   STATUS    RESTARTS   AGE
     alertmanager-one-eye-prometheus-operato-alertmanager-0           2/2     Running   0          3m3s
     one-eye-logging-extensions-f8599dd6f-kmd2x                       1/1     Running   0          107s
