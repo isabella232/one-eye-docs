@@ -26,6 +26,8 @@ The list displays the following information about the services:
     metrics: 9153/ TCP → 9153/ TCP
     ```
 
+> To quickly find a service, or to filter the list to show only services that match a criteria, click **![Show filters](/docs/one-eye/headless/icon-filters.png)** to display the filter bar.
+
 Click on the name of a service to display its details.
 
 From the services list, you can drill down through the following levels to the underlying resources of the infrastructure: [List of services](#service-list) > [Service](#service) > [Pod](#pod) > [Node](#node)
