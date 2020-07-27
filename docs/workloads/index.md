@@ -41,9 +41,19 @@ The following details of the workload are displayed:
 - **VERSION**: The version number of the workload, for example, v2.
 - **REPLICAS**: The number of replicas for the workload.
 - **LABELS**: The list of Kubernetes labels assigned to the resource.
-- **Pods**: The list of pods running this workload. Click on the name of the pod to display the [details of the pod](#pod).
+- **Pods**: The list of pods running this workload. Click on the name of the pod to display the [details of the pod](#pod). You can also display, search, and tail the [logs of the pod](#pod-logs).
 - **Events**: Recent events related to the resource.
 - **Metrics**: Dashboards of the most important metrics. Click ![Open metrics in Grafana](/img/docs/backyards/icon-open-in-grafana.png) to open the related dashboards in Grafana.
+
+## Pod logs {#pod-logs}
+
+To display the logs of a pod, click ![Show pod logs](/docs/one-eye/headless/icon-loki.png) icon in the **ACTION** column of the pod.
+
+![Show pod logs](pod-details-logs.png)
+
+You can search in the logs of the pod, or tail them by selecting **Autoscroll**.
+
+![Tail pod logs](log-tailing.png)
 
 ## Pod details {#pod}
 
