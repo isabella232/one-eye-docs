@@ -17,6 +17,8 @@ The **MENU > WORKLOADS** page contains information about the workloads your logg
 - **KIND**: The kind of the workload, for example, DaemonSet, Deployment, ReplicaSet, or StatefulSet.
 - **REPLICAS**: The number of replicas for the workload.
 
+> To quickly find a workload, or to filter the list to show only workloads that match a criteria, click **![Show filters](/docs/one-eye/headless/icon-filters.png)** to display the filter bar.
+
 Click on the name of a workload to display its details.
 
 From the details overview, you can drill down through the following levels to the underlying resources of the infrastructure: [Overview](#workload-overview) > Controller > [Pod](#pod) > [Node](#node)
