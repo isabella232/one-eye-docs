@@ -84,7 +84,7 @@ The operator mode follows the familiar [operator pattern](https://kubernetes.io/
 
 ![Operator mode - Declarative installer day2](/img/blog/declarative-installer/day2.png)
 
-Using the operator mode is the recommended way to integrate the One Eye installer into a Kubernetes-native continuous delivery solution, for example, Argo, where the integration boils down to applying YAML files to get the installer deployed as an operator.
+Using the operator mode is the recommended way to integrate the One Eye installer into a Kubernetes-native continuous delivery solution, for example, ArgoCD, where the integration boils down to applying YAML files to get the installer deployed as an operator.
 
 Existing configurations managed using the `reconcile` command work out-of-the box after switching to the operator mode.
 
