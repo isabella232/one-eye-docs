@@ -100,12 +100,6 @@ To use One Eye in operator mode, complete the following steps. In this scenario,
     helm install --name=one-eye --namespace=one-eye-system banzaicloud-stable/one-eye
     ```
 
-1. Activate the One Eye operator on your cluster:
-
-    ```bash
-    one-eye operator reconcile
-    ```
-
 ### Uninstall the operator {#operator-uninstall}
 
 If have used the One Eye operator on a cluster and want to delete One Eye and the operator, run the following commands.
