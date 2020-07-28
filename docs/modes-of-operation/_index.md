@@ -31,7 +31,7 @@ Also, it it not suitable for automation. CD systems typically require Helm chart
 
 To use One Eye in imperative mode, [install the one-eye command-line tool](../cli/install/), then use its commands to install One Eye and perform other actions. For a list of available commands, see the [CLI reference](../cli/reference/).
 
-> Note: You can also monitor and configure many aspects of your logging infrastructure using the One Eye web interface. To access the web interface run the `one-eye ingress install --update; one-eye ingress connect` command (if your [KUBECONFIG file is set properly](../cli/login/), the command automatically performs the login).
+> Note: You can also monitor and configure many aspects of your logging infrastructure using the One Eye web interface. To access the web interface run the `one-eye ingress install --update; one-eye ingress connect` command (if your [KUBECONFIG file is set properly](../cli/login/)).
 
 ### Install/Uninstall components
 
