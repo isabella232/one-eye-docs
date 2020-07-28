@@ -4,7 +4,7 @@ shortTitle: Install
 weight: 10
 ---
 
-To quickly install the CLI, use the following command:
+To quickly install the CLI, use the following command. To upgrade an existing installation, see [Upgrade the CLI](../upgrade/).
 
 ```bash
 $ curl https://getoneeye.sh | sh
