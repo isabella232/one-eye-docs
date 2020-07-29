@@ -23,6 +23,7 @@ one-eye cli
 ### SEE ALSO
 
 * [one-eye cert-manager](/docs/one-eye/cli/reference/one-eye_cert-manager/)	 - Manage the cert-manager chart
+* [one-eye elasticsearch](/docs/one-eye/cli/reference/one-eye_elasticsearch/)	 - Manage the elasticsearch chart
 * [one-eye ingress](/docs/one-eye/cli/reference/one-eye_ingress/)	 - Manage ingress for one-eye
 * [one-eye license](/docs/one-eye/cli/reference/one-eye_license/)	 - Show Evaluation License
 * [one-eye logging](/docs/one-eye/cli/reference/one-eye_logging/)	 - Manage the logging components

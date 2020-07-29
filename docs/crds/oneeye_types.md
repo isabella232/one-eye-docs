@@ -15,17 +15,21 @@ generated_file: true
 | certmanager | CertManager | No | - | CertManager component descriptor<br> |
 | loki | Loki | No | - | Loki component descriptor<br> |
 | ingress | Ingress | No | - | Ingress component descriptor<br> |
+| elasticSearch | ElasticSearch | No | - | ElasticSearch component descriptor<br> |
 | controlNamespace | string | Yes | - | Observer will be placed into this namespace<br> |
 ### ObserverStatus
 #### ObserverStatus defines the observed state of Observer
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| ready | bool | No | - | Ready status flag<br> |
-| summary | string | No | - | An human-readable summary of Observer's status<br> |
+| certmanager | CertManagerStatus | No | - |  |
+| elasticSearch | ElasticSearchStatus | No | - |  |
+| ingress | IngressStatus | No | - |  |
+| logging | LoggingStatus | No | - |  |
+| loki | LokiStatus | No | - |  |
+| prometheus | PrometheusStatus | No | - |  |
+| thanos | ThanosStatus | No | - |  |
 ### Observer
-#### Observer is the Schema for the observers API
-
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 |  | metav1.TypeMeta | Yes | - |  |
