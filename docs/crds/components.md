@@ -10,6 +10,10 @@ generated_file: true
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | operator | *thanosOperator.ComponentConfig | No | - | Operator config descriptor<br> |
+### ThanosStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
 ### Logging
 #### Logging component
 
@@ -18,20 +22,33 @@ generated_file: true
 | operator | *loggingOperator.ComponentConfig | No | - | Operator config descriptor<br> |
 | extensions | *loggingExtensions.ComponentConfig | No | - | Extensions config descriptor<br> |
 | tls | bool | No | - | TLS flag<br> |
+### LoggingStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
+| extensions | LoggingExtensionsStatus | No | - |  |
+### LoggingExtensionsStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
 ### Prometheus
 #### Prometheus component
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| prometheusOperatorChart | *PrometheusOperatorChart | No | - | Descriptor for Helm Chart installer of Cert-Manager<br> |
+| prometheusOperatorChart | *PrometheusOperatorChart | No | - | Descriptor for Helm Chart installer of Prometheus<br> |
 ### PrometheusOperatorChart
-#### Descriptor for Helm Chart installer of Cert-Manager
+#### Descriptor for Helm Chart installer of Prometheus
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 | disabled | bool | No | - | Disabled status<br> |
 | values | string | No | - | Helm Chart values<br> |
 | objectStoreConfig | *secret.Secret | No | - | Configuration for object store<br> |
+### PrometheusStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
 ### CertManager
 #### Cert-Manager component
 
@@ -45,6 +62,10 @@ generated_file: true
 |---|---|---|---|---|
 | disabled | bool | No | - | Disabled status<br> |
 | values | string | No | - | Helm Chart values<br> |
+### CertManagerStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
 ### Loki
 #### Loki component
 
@@ -58,11 +79,32 @@ generated_file: true
 |---|---|---|---|---|
 | disabled | bool | No | - | Disabled status<br> |
 | values | string | No | - | Helm Chart values<br> |
+### LokiStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
+### ElasticSearch
+#### ElasticSearch component
+
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| elasticSearchOperator | *ElasticSearchOperator | No | - | Descriptor for ElasticSearch<br> |
+### ElasticSearchOperator
+#### Descriptor for ElasticSearch
+
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| disabled | bool | No | - | Disabled status<br> |
+### ElasticSearchStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
 ### Ingress
 #### Ingress component
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
+| annotations | map[string]string | No | - | Annotations<br> |
 | disabled | bool | No | - | Disabled status<br> |
 | ui | *oneEyeUI.ComponentConfig | No | - | One-eye UI sub-component<br> |
 | ingressSpec | *v1beta1.IngressSpec | No | - | Ingress specification<br> |
@@ -74,3 +116,16 @@ generated_file: true
 |---|---|---|---|---|
 | disabled | bool | No | - | Disabled status<br> |
 | values | string | No | - | Helm Chart values<br> |
+### IngressStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| nginx | NginxIngressStatus | No | - |  |
+| ui | UIStatus | No | - |  |
+### NginxIngressStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| controllerImage | string | No | - |  |
+### UIStatus
+| Variable Name | Type | Required | Default | Description |
+|---|---|---|---|---|
+| image | string | No | - |  |
