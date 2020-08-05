@@ -58,7 +58,7 @@ The graph serves as a visual monitoring tool, as it displays various errors and 
     - To display the YAML configuration of the component, click **Configuration**.
     - To open the related dashboards in [Grafana](https://grafana.com), click ![Open metrics in Grafana](/img/docs/backyards/icon-open-in-grafana.png).
 
-- To list the pods that belong to a logging flow, click the icon of the match selector of the logging flow. To display the [details of a pod](/docs/one-eye/workloads/index.md#pod), click ![Workload icon](/docs/one-eye/headless/icon-workload.png).
+- To list the pods that belong to a logging flow, click the icon of the match selector of the logging flow. To display the [details of a pod]({{< relref "/docs/one-eye/workloads/index.md#pod" >}}), click ![Workload icon](/docs/one-eye/headless/icon-workload.png).
 
     ![List of matching pods in a logging flow](flow-matching-pods.png)
 
