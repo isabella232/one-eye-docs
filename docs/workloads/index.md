@@ -17,6 +17,8 @@ The **MENU > WORKLOADS** page contains information about the workloads your logg
 - **KIND**: The kind of the workload, for example, DaemonSet, Deployment, ReplicaSet, or StatefulSet.
 - **REPLICAS**: The number of replicas for the workload.
 
+> To quickly find a workload, or to filter the list to show only workloads that match a criteria, click **![Show filters](/docs/one-eye/headless/icon-filters.png)** to display the filter bar.
+
 Click on the name of a workload to display its details.
 
 From the details overview, you can drill down through the following levels to the underlying resources of the infrastructure: [Overview](#workload-overview) > Controller > [Pod](#pod) > [Node](#node)
@@ -39,9 +41,19 @@ The following details of the workload are displayed:
 - **VERSION**: The version number of the workload, for example, v2.
 - **REPLICAS**: The number of replicas for the workload.
 - **LABELS**: The list of Kubernetes labels assigned to the resource.
-- **Pods**: The list of pods running this workload. Click on the name of the pod to display the [details of the pod](#pod).
+- **Pods**: The list of pods running this workload. Click on the name of the pod to display the [details of the pod](#pod). You can also display, search, and tail the [logs of the pod](#pod-logs).
 - **Events**: Recent events related to the resource.
 - **Metrics**: Dashboards of the most important metrics. Click ![Open metrics in Grafana](/img/docs/backyards/icon-open-in-grafana.png) to open the related dashboards in Grafana.
+
+## Pod logs {#pod-logs}
+
+To display the logs of a pod, click ![Show pod logs](/docs/one-eye/headless/icon-loki.png) icon in the **ACTION** column of the pod.
+
+![Show pod logs](pod-details-logs.png)
+
+You can search in the logs of the pod, or tail them by selecting **Autoscroll**.
+
+![Tail pod logs](log-tailing.png)
 
 ## Pod details {#pod}
 
