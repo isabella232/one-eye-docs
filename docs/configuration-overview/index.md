@@ -52,15 +52,16 @@ The graph serves as a visual monitoring tool, as it displays various errors and 
 
 <img src="topology-legend.png" alt="Topology view legend" width="50%"/>
 
-- To display the metrics of a component in a sidebar, click on the component (for example, on an output).
+- To display the metrics of a component in a sidebar, click on the component (for example, on an output), then select **Metrics**.
     ![Metrics and configuration of a logging component](logging-overview-sidebar.png)
 
-    - To display the YAML configuration of the component, click **Configuration**.
     - To open the related dashboards in [Grafana](https://grafana.com), click ![Open metrics in Grafana](/img/docs/backyards/icon-open-in-grafana.png).
 
-- To list the pods that belong to a logging flow, click the icon of the match selector of the logging flow. To display the [details of a pod]({{< relref "/docs/one-eye/workloads/index.md#pod" >}}), click ![Workload icon](/docs/one-eye/headless/icon-workload.png).
+- To list the pods that belong to a logging flow, click the icon of the match selector of the logging flow, then select **Matching pods**. To display the [details of a pod]({{< relref "/docs/one-eye/workloads/index.md#pod" >}}), click ![Workload icon](/docs/one-eye/headless/icon-workload.png).
 
     ![List of matching pods in a logging flow](flow-matching-pods.png)
+
+- To display the YAML configuration of the component, click on the component, then click **Configuration**.
 
 ## Drill-down to the pods and nodes
 
@@ -68,9 +69,11 @@ The graph serves as a visual monitoring tool, as it displays various errors and 
 
 ## Configure your logging infrastructure
 
-You can configure the logging infrastructure from the command line by configuring the [Logging operator](/docs/one-eye/logging-operator/) and the [Logging Extensions operator](/docs/one-eye/logging-extensions/).
+You can configure the logging infrastructure from the command line by configuring the [Logging operator](/docs/one-eye/logging-operator/) and the [Logging Extensions operator](/docs/one-eye/logging-extensions/). Currently the One Eye web interface offers limited support to configure logging flows and logging outputs.
 
-Currently the One Eye web interface offers limited support to configure logging flows and logging outputs. To create a new logging flow or a logging output on the UI, complete the following steps.
+> To modify the configuration of an existing object, click on the object on the **MENU > LOGGING OVERVIEW**, then select **Configuration**.
+
+To create a new logging flow or a logging output on the UI, complete the following steps.
 
 1. Navigate to **MENU > LOGGING OVERVIEW**, then click ![Create new icon](/docs/one-eye/headless/icon-create-new.png).
 1. Select the type of resource you want to create (flow or output).

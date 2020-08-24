@@ -187,4 +187,4 @@ In real-life scenarios you have several flows and outputs for different purposes
     ```
 
     The [One Eye UI](/docs/one-eye/configuration-overview/) opens in your browser.
-    ![One Eye Dashboard](/blog/one-eye-for-observability/one-eye-connect.png)
+    ![One Eye Dashboard](/docs/configuration-overview/overview-nocallouts.png)
