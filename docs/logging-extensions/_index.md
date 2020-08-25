@@ -13,7 +13,7 @@ why some pods were evicted from the node.
 - Collect logs from the nodes like `kubelet` logs.
 - Collect logs from files on the nodes, for example, `audit` logs, or the `systemd` journal.
 
-You can configure the extensions in the One Eye custom resource configuration. It's also a standalone kubernetes operator.
+You can configure the extensions in the One Eye custom resource configuration. It's also a standalone Kubernetes operator.
 
 > Follow [this guide](/docs/one-eye/cli/install/) to install the One Eye command line tool.
 
