@@ -1,81 +1,84 @@
 ---
 title: Logging extensions file tailer webhook
+shorttitle: File tailer webhook
 weight: 1000
 ---
 
-## Logging extensions file tailer webhook
-
-### Introduction
+{{< contents >}}
 
 Another way to keep your custom file's content tailed aside of [`host file tailer`](../#host-file-tailer) service, to configure and use the `file tailer webhook` service.
 While the containers of the `host file tailers` run in a separated pod, `file tailer webhook` uses a different approach, it injects a sidecar container for every tailed file into your pod, triggered by a simple pod annotation.
 
----
-### Installation
+## Install the webhook
+
 The only thing you need is to provide valid TLS certificates to the `file tailer webhook`. 
 
 There are three possible ways to do this:
-* install `cert-manager` with one-eye
-* use your own `cert-manager` service
-* provide valid secrets and ca bundle by your own
 
-#### Install with cert-manager:
-[`One-eye`](https://banzaicloud.com/products/one-eye/) offers a [`cert-manager`](https://cert-manager.io/) installation. The `cert-manager` is a powerful tool, so we strongly recommend to use it.
+* Install `cert-manager` with one-eye
+* Use an already installed `cert-manager` service
+* [Provide your own secrets and CA bundle](#own-secrets)
 
-First install cert-manager:
-```bash
-one-eye-cli cert-manager install
-```
+### Install with cert-manager {#cert-manager}
 
-Then you can install the webhook support:
-```bash
-one-eye-cli tailer-webhook install
-```
+You can install [`cert-manager`](https://cert-manager.io/) with the [`one-eye`](/products/one-eye/) command-line tool. The `cert-manager` is a powerful tool, so we strongly recommend to use it. Complete the following steps.
 
-> Hints:
-> * When there is a `cert-manager` on your cluster already, you can skip the cert-manager installation step, and you can use the existing one.
-> * If there is no existing `cert-manager` on your cluster, and there won't be secret and cabundle parameters provided, the install will fail.
+1. First, install cert-manager. If `cert-manager` is already installed on your cluster, you can skip this step and use the existing installation.
 
-#### Provide your own secrets:
-When you have your own certifications set up, you can pass them to the installer to configure `file tailer webhook` to use them. In this case there is no need to use `cert-manager`. 
+    ```bash
+    one-eye-cli cert-manager install
+    ```
+
+1. Install the webhook:
+
+    ```bash
+    one-eye-cli tailer-webhook install
+    ```
+
+    If `cert-manager` is not installed on your cluster, and you haven't provided the secret and cabundle parameters, the install will fail.
+
+### Provide your own secrets {#own-secrets}
+
+When you have your own certificates set up, you can pass them to the installer to configure `file tailer webhook` to use them. In this case there is no need to use `cert-manager`.
 The required arguments are the following:
+
 ```bash
 one-eye-cli tailer-webhook install --webhook-secret <secret name> --webhook-cabundle <CA bundle>
 ```
 
-###### Example:
+To create the secret and the CA bundle, complete the following procedure.
 
 1. Let's assume you have your own certs generated in /tmp
 
-2. Make your own secret with your serving certs
-```bash
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Secret
-metadata:
-  name: "my-own-certs"
-  namespace: ${namespace}
-data:
-  tls.crt: $(cat /tmp/tls.crt | base64)
-  tls.key: $(cat /tmp/tls.key | base64)
-type: kubernetes.io/tls
-EOF
-```
+2. Make your own secret with your certificates:
 
-3. Install logging with your secret name and rootCA information provided
-```bash
-one-eye-cli tailer-webhook install --namespace ${namespace} --webhook-secret "my-own-certs" --webhook-cabundle "$(cat /tmp/rootCA.pem)"
-```
+    ```bash
+    kubectl apply -f - <<EOF
+    apiVersion: v1
+    kind: Secret
+    metadata:
+    name: "my-own-certs"
+    namespace: ${namespace}
+    data:
+    tls.crt: $(cat /tmp/tls.crt | base64)
+    tls.key: $(cat /tmp/tls.key | base64)
+    type: kubernetes.io/tls
+    EOF
+    ```
+
+3. Install the webhook with your secret name and rootCA information provided:
+
+    ```bash
+    one-eye-cli tailer-webhook install --namespace ${namespace} --webhook-secret "my-own-certs" --webhook-cabundle "$(cat /tmp/rootCA.pem)"
+    ```
 
 > Hints:
 > - Certs must allow one-eye-tailer-webhook, one-eye-tailer-webhook.namespace, one-eye-tailer-webhook.namespace.svc.
 
----
-### Triggering the webhook
-`File tailer webhook` is based on a [`Mutating Admission Webhook`](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) which gets called every time, when a pod starts, and will be triggered when a pod specification contains annotation with the key:
-- `sidecar.logging-extensions.banzaicloud.io/tail`.
+## Triggering the webhook
 
-###### Example:
+`File tailer webhook` is based on a [`Mutating Admission Webhook`](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) which gets called every time when a pod starts, and will be triggered when a pod specification contains an annotation with the `sidecar.logging-extensions.banzaicloud.io/tail` key. For example:
+
 ```bash
 apiVersion: v1
 kind: Pod
@@ -97,7 +100,10 @@ spec:
 ...
 ```
 
+> Note: if the pod contains multiple containers, see [Multi-container pods](#multi-container-pods).
+
 ### About the File Tailer Webhook annotation
+
 The basic format of a `file tailer webhook` annotation is the following:
 
 |||
@@ -105,7 +111,8 @@ The basic format of a `file tailer webhook` annotation is the following:
 | Key | `sidecar.logging-extensions.banzaicloud.io/tail` |
 | Value | Files to be tailed separated by commas |
 
-###### Example:
+For example:
+
 ```bash
 ...
 metadata:
@@ -115,10 +122,10 @@ spec:
 ...
 ```
 
-### Mutli-container pods
-In some cases you have multiple containers in your pod and you want to distinguish which file annotation belongs to which container. You can order every file annotations to particular container by prefixing the annotation with a `${ContainerName}:` container key.
+### Multi-container pods
 
-###### Example:
+In some cases you have multiple containers in your pod and you want to distinguish which file annotation belongs to which container. You can order every file annotations to particular container by prefixing the annotation with a `${ContainerName}:` container key. For example:
+
 ```bash
 ...
 metadata:
@@ -128,13 +135,14 @@ spec:
 ...
 ```
 
+{{< warning >}}
+- Annotations without containername prefix: the file gets tailed on the default container (container 0)
+- Annotations with invalid containername: file tailer annotation gets discarded
+{{< /warning >}}
+
 | Annotation | Explanation |
 |---|---|
 | sample-container:/var/log/date | tails file /var/log/date in sample-container |
 | sample-container2:/var/log/anotherfile |  tails file /var/log/anotherfile in sample-container2 |
 | /var/log/mycustomfile | tails file /var/log/mycustomfile in default container (sample-container) |
 | foobarbaz:/foo/bar/baz | will be discarded due to non-existing container name |
-
-> Hints:
-> - Annotations without containername prefix: the file gets tailed on the default container (container 0)
-> - Annotations with invalid containername: file tailer annotation gets discarded
