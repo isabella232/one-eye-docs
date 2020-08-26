@@ -139,6 +139,8 @@ After you have completed the [Prerequisites](#prerequisites), you can install On
 
     If you have your Amazon credential configured in your environment, the CLI will ask if you want to use them to access the bucket. When you choose *yes* the CLI will automatically create a Kubernetes secret with your Amazon Key and Secret. After specifying the bucket name and region the generated template is ready to be used (or customized). It includes the secret name and bucket information as well.
 
+    > Note: For details on configuring different output types, see the {{% xref "/docs/one-eye/logging-operator/quickstarts/_index.md" %}}.
+
 1. Configure a logging flow. The basic template provides an empty flow. Customize the `match` section and add filters from the [supported filter list](/docs/one-eye/logging-operator/plugins/filters/).
 
     ```bash

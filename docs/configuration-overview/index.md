@@ -79,5 +79,9 @@ To create a new logging flow or a logging output on the UI, complete the followi
 1. Select the type of resource you want to create (flow or output).
 1. Select the namespace where you want to apply the new resource.
     ![Create logging flows and outputs](create-flow.png)
-1. Import the YAML configuration of the resource, or create a new one in the browser. For details on the possible configuration values, see [Logging flows]({{< relref "/docs/one-eye/logging-operator/crds/_index.md#flows-clusterflows" >}}) and [Logging outputs]({{< relref "/docs/one-eye/logging-operator/crds/_index.md#outputs-clusteroutputs" >}}).
+1. Import the YAML configuration of the resource, or create a new one in the browser.
+
+    - For details on configuring different output types, see the {{% xref "/docs/one-eye/logging-operator/quickstarts/_index.md" %}}.
+    - For details on the possible configuration values, see [Logging flows]({{< relref "/docs/one-eye/logging-operator/crds/_index.md#flows-clusterflows" >}}) and [Logging outputs]({{< relref "/docs/one-eye/logging-operator/crds/_index.md#outputs-clusteroutputs" >}}).
+
 1. Click **CREATE**. One Eye validates the configuration and creates the new resource.
