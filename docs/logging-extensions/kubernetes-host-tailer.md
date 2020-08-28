@@ -120,66 +120,6 @@ spec:
 EOF
 ```
 
-### Configuration options
-
-| Variable Name | Type | Required | Default | Description |
-|---|---|---|---|---|
-| fileTailers | []FileTailer | No | - | List of file tailers<br> |
-| systemdTailers | []SystemdTailer | No | - | List of systemd tailers<br> |
-| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | EnableRecreateWorkloadOnImmutableFieldChange enables the operator to recreate the<br>fluentbit daemonset and the fluentd statefulset (and possibly other resource in the future)<br>in case there is a change in an immutable field<br>that otherwise couldn't be managed with a simple update.<br> |
-| workloadMetaOverrides | *types.MetaBase | No | - | Override metadata of the created resources<br> |
-| workloadOverrides | *types.PodSpecBase | No | - | Override podSpec fields for the given daemonset<br> |
-
-### Example: Configure logging Flow to route logs from a Hosttailer
-
-The following example uses the flow's match term to listen the previously created `file-hosttailer-sample` Hosttailer's log. 
-
-```bash
-kubectl apply -f - <<EOF
-apiVersion: logging.banzaicloud.io/v1beta1
-kind: Flow
-metadata:
-  name: hosttailer-flow
-  namespace: default
-spec:
-  filters:
-  - tag_normaliser: {}
-  # keeps data matching to label, the rest of the data will be discarded by this flow implicitly
-  match:
-  - select:
-      labels: 
-        app.kubernetes.io/name: file-hosttailer-sample
-      # there might be a need to match on container name too (in case of multiple containers)
-      container_names:
-        - nginx-access
-  outputRefs:
-    - sample-output
-EOF
-```
-
-### Example: Kubernetes host tailer with multiple tailers
-
-```bash
-kubectl apply -f - <<EOF
-apiVersion: logging-extensions.banzaicloud.io/v1alpha1
-kind: HostTailer
-metadata:
-  name: multi-sample
-spec:
-  # list of File tailers
-  fileTailers:
-    - name: nginx-access
-      path: /var/log/nginx/access.log
-    - name: nginx-error
-      path: /var/log/nginx/error.log
-  # list of Systemd tailers
-  systemdTailers:
-    - name: my-systemd-tailer
-      maxEntries: 100
-      systemdFilter: kubelet.service
-EOF
-```
-
 ### Example: Setting up custom priority
 
 Create your own custom priority class in Kubernetes. Set its value between 0 and 2000000000.
