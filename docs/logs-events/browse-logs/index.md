@@ -2,6 +2,8 @@
 title: Browse logs
 shorttitle: Inspect logs
 weight: 100
+aliases:
+    - /docs/one-eye/browse-logs/
 ---
 
 The **MENU > INSPECT** page allows you to search and browse the collected logs using [Loki's LogQL query language](https://grafana.com/docs/loki/latest/logql/).

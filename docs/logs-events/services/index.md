@@ -1,6 +1,8 @@
 ---
 title: Services
 weight: 200
+aliases:
+    - /docs/services/
 ---
 
 
