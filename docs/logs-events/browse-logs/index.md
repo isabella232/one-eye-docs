@@ -2,6 +2,8 @@
 title: Browse logs
 shorttitle: Inspect logs
 weight: 100
+aliases:
+    - /docs/one-eye/browse-logs/
 ---
 
 {{< contents >}}

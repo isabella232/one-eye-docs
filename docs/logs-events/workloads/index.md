@@ -1,6 +1,8 @@
 ---
 title: Workloads
 weight: 300
+aliases:
+    - /docs/one-eye/workloads/
 ---
 
 {{< contents >}}

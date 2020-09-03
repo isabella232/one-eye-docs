@@ -2,6 +2,8 @@
 title: Prometheus alerts
 shorttitle: Alerts
 weight: 500
+aliases:
+    - /docs/one-eye/prometheus-alerts/
 ---
 
 {{< contents >}}

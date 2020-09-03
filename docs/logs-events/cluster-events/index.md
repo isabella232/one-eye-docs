@@ -2,6 +2,8 @@
 title: Kubernetes events
 shorttitle: Cluster events
 weight: 400
+aliases:
+    - /docs/one-eye/cluster-events/
 ---
 
 {{< contents >}}

@@ -1,6 +1,8 @@
 ---
 title: Configuration overview
 weight: 100
+aliases:
+    - /docs/one-eye/configuration-overview/
 ---
 
 The **MENU > LOGGING OVERVIEW** page on the One Eye web interface visualizes your logging configuration and annotates it with real-time information about throughput. Various metrics based on the current log traffic are also displayed. The topology page serves as a starting point for diagnosing problems within your logging infrastructure.

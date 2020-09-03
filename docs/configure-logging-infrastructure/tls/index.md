@@ -2,6 +2,8 @@
 title: TLS-encrypted log transfer
 shorttitle: TLS encryption
 weight: 800
+aliases:
+    - /docs/one-eye/tls/
 ---
 
 One Eye can automatically encrypt the communication between Fluentd and Fluent Bit, and it also automates handling the certificates used to mutually authenticate the TLS connections using [cert-manager](https://cert-manager.io/).
