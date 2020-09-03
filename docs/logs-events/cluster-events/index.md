@@ -1,7 +1,7 @@
 ---
 title: Kubernetes events
 shorttitle: Cluster events
-weight: 330
+weight: 400
 ---
 
 {{< contents >}}

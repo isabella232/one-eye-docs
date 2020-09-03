@@ -1,7 +1,7 @@
 ---
 title: Prometheus alerts
 shorttitle: Alerts
-weight: 350
+weight: 500
 ---
 
 {{< contents >}}

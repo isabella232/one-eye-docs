@@ -1,7 +1,7 @@
 ---
 title: Browse logs
 shorttitle: Inspect logs
-weight: 380
+weight: 100
 ---
 
 {{< contents >}}
