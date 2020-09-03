@@ -1,7 +1,7 @@
 ---
 title: Browse logs
 shorttitle: Inspect logs
-weight: 380
+weight: 100
 ---
 
 The **MENU > INSPECT** page allows you to search and browse the collected logs using [Loki's LogQL query language](https://grafana.com/docs/loki/latest/logql/).
