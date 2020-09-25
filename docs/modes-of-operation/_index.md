@@ -15,7 +15,9 @@ To support the different use-cases from Day 0 to Day 2 operations, One Eye has d
 
 The main purpose of the imperative mode is to install One Eye, get you started, and help you experiment with the various components. You can access only a small subset of the available configuration options and features (mostly just the default settings and some of the most important configuration flags) to avoid getting overloaded with command line flags.
 
-Most notably, you can `install` and `delete` One Eye from the command line. Internally, the install and delete commands change the component-specific parts of the main configuration, then trigger the reconciliation of the affected components.
+Most notably, you can `install` and `delete` One Eye from the command line. Internally, the install and delete commands change the component-specific parts of the main configuration, then apply or trigger the reconciliation of the affected components.
+
+ > Note: The CLI will try to detect if an operator is already running in the cluster. If it does, it just updates Observer configuration and waits for changes to take effect instead of applying by itself. 
 
 ![Imperative mode - Declarative installer day0](/img/blog/declarative-installer/day0.png)
 
