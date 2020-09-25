@@ -49,7 +49,7 @@ The following components can be installed/uninstalled individually. The `one-eye
 
 Reconciler mode is a declarative CLI mode. The `reconcile` command is a one-shot version of an operator's reconcile flow. It executes the component reconcilers in order, and can decide whether they require another reconciliation round, or are already finished. Reconciling can apply new configuration, and remove disabled components from the system.
 
-> Note: In this mode, the operator is not installed on the cluster. The controller code runs from the CLI on the client side.
+ > Note: The CLI will try to detect if an operator is already running in the cluster. If it does, it just updates Observer configuration and waits for changes to take effect instead of applying by itself. 
 
 ![Reconciler mode - Declarative installer day1](/img/blog/declarative-installer/day1.png)
 
