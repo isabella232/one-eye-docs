@@ -35,7 +35,7 @@ To use One Eye in imperative mode, [install the one-eye command-line tool](../cl
 
 ### Install/Uninstall components
 
-The following components can be installed/uninstalled individually. The `one-eye removeall` command uninstalls them all. For details on installing and uninstalling the One Eye operator, see [Operator mode](#operator).
+The following components can be installed/uninstalled individually. The `one-eye observer removeall` command uninstalls them all. For details on installing and uninstalling the One Eye operator, see [Operator mode](#operator).
 
 - [cert-manager]({{< relref "/docs/one-eye/cli/reference/one-eye_cert-manager.md" >}}): `one-eye cert-manager [install|uninstall]`
 - [ingress (backend and UI)]({{< relref "/docs/one-eye/cli/reference/one-eye_ingress.md" >}}): `one-eye ingress [install|uninstall]`
