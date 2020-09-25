@@ -122,9 +122,14 @@ The helm chart installs a One Eye observer with the following components enabled
 ** Kubernetes Event tailer support
 ** In container file tailer webhook
 * Cert-manager
+
 ## The Observer Custom Resource {#cr}
 
-One Eye installs the Observer Custom Resource with the following default values.
+One Eye installs the Observer Custom Resource with the following default values. You can examine specific fields of the Observer custom resource using the following command:
+
+```bash
+kubectl explain observer --recursive
+```
 
 ```yaml
 apiVersion: one-eye.banzaicloud.io/v1alpha1
