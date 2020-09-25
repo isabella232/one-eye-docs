@@ -25,8 +25,6 @@ Once you are finished experimenting with One Eye, the recommended way forward is
 
 The drawback of the imperative mode is that there is no overall state of components, so it can't tell what has already been installed.
 
-Also, it it not suitable for automation. CD systems typically require Helm charts, Kustomize, or pure YAML resources to operate with. Although the imperative commands of One Eye have a `--dump-resources` flag that generates YAML files instead of applying them, you would still have to run the install command locally for each component, and commit the generated resources into version control. The CD workflow would then have to specify sequential steps for each component separately, making the whole flow difficult to extend over time.
-
 ### Using the imperative mode
 
 To use One Eye in imperative mode, [install the one-eye command-line tool](../cli/install/), then use its commands to install One Eye and perform other actions. For a list of available commands, see the [CLI reference](../cli/reference/).
