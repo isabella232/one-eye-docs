@@ -106,7 +106,7 @@ If have used the One Eye operator on a cluster and want to delete One Eye and th
 
 ```bash
 one-eye observer removeall
-helm del --purge one-eye
+helm del one-eye
 ```
 
 ## The Observer Custom Resource {#cr}
