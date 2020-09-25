@@ -71,7 +71,7 @@ To use One Eye in reconciler mode, complete the following steps. In this scenari
 1. Prepare the configuration settings you want to apply in a YAML file, and run the following command. For details on the configuration settings, see the [Observer Custom Resource](#cr).
 
     ```bash
-    one-eye reconcile --from-file <path-to-file>
+    one-eye observer reconcile --from-file <path-to-file>
     ```
 
 1. The settings applied to the components are the result of merging the `default settings` + `valuesOverride` + `managed settings`. You cannot change the managed settings to avoid misconfiguration and possible malfunction.
