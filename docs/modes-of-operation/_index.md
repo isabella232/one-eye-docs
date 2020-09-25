@@ -105,7 +105,7 @@ To use One Eye in operator mode, complete the following steps. In this scenario,
 If have used the One Eye operator on a cluster and want to delete One Eye and the operator, run the following commands.
 
 ```bash
-one-eye removeall
+one-eye observer removeall
 helm del --purge one-eye
 ```
 
