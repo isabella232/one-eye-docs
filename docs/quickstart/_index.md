@@ -25,7 +25,7 @@ You need a Kubernetes cluster to test One Eye with. If you don't already have a 
 
 ### Create an object store
 
-You will need an object store. Thanos supports many types of object storage, see the [official Thanos documentation](https://thanos.io/storage.md/) for details.
+You will need an object store. Thanos supports many types of object storage, see the [official Thanos documentation](https://thanos.io/tip/thanos/storage.md/) for details.
 
 ### Install the One Eye tool
 
