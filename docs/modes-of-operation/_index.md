@@ -130,19 +130,3 @@ One Eye installs the Observer Custom Resource with the following default values.
 ```bash
 kubectl explain observer --recursive
 ```
-
-```yaml
-apiVersion: one-eye.banzaicloud.io/v1alpha1
-kind: Observer
-metadata:
-  name: one-eye
-spec:
-  controlNamespace: default
-  ingress: {}
-  logging:
-    extensions: {}
-    operator: {}
-  prometheus:
-    prometheusOperatorChart: {}
-  thanos: {}
-```
