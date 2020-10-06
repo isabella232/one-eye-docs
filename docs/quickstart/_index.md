@@ -3,7 +3,7 @@ title: Quickstart
 weight: 50
 ---
 
-{{< contents >}}
+
 
 To **evaluate** the services [Banzai Cloud One Eye](/products/one-eye/) (One Eye) offers, we recommend to create a test environment.
 This way you can start over any time, and try all the options you are interested in without having to worry about changes made to your existing environment, even if it's not used in production.
@@ -32,13 +32,14 @@ You will need an object store. Thanos supports many types of object storage, see
 Install the One Eye command-line tool. You can use the One Eye CLI tool to install One Eye and other components to your cluster.
 > Note: The One Eye CLI supports macOS and Linux (x86_64). It may work on Windows natively, but we don't test it.
 
-The quickest way to install the `one-eye-cli` package for your environment is to run the following command:
+1. [Register for an evaluation version](/products/try-one-eye/).
+1. Install the `one-eye-cli` package for your environment by running the following command:
 
-```bash
-curl https://getoneeye.sh | sh
-```
+    ```bash
+    curl https://getoneeye.sh | sh
+    ```
 
-For other options, see the [One Eye CLI Installation Guide](../cli/install/).
+    For other options, see the [One Eye CLI Installation Guide](../cli/install/).
 
 {{% include-headless "doc/quickstart-set-kubernetes-context.md" %}}
 

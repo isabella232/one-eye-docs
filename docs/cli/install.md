@@ -4,7 +4,7 @@ shortTitle: Install
 weight: 10
 ---
 
-To quickly install the CLI, use the following command:
+To install the One Eye, [register for an evaluation version](/products/try-one-eye/) and run the following command to install the CLI tool:
 
 ```bash
 $ curl https://getoneeye.sh | sh

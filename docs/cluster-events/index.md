@@ -4,8 +4,6 @@ shorttitle: Cluster events
 weight: 330
 ---
 
-{{< contents >}}
-
 ## List of events {#event-list}
 
 The **MENU > CLUSTER EVENTS** page contains the Kubernetes events that occurred on your cluster. You can filter, order, and search events to immediately identify the relevant changes on our cluster.

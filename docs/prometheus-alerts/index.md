@@ -4,8 +4,6 @@ shorttitle: Alerts
 weight: 350
 ---
 
-{{< contents >}}
-
 ## List of alerts {#alert-list}
 
 The **MENU > ALERTS** page contains information about the alert rules configured on your cluster. One Eye retrieves this information from [Prometheus Alertmanager](https://www.prometheus.io/docs/alerting/latest/alertmanager/). By default, active alerts are displayed on the top of the list.

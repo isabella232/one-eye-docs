@@ -3,7 +3,7 @@ title: Workloads
 weight: 300
 ---
 
-{{< contents >}}
+
 
 {{% include-headless "doc/one-eye/drill-down-intro.md" %}}
 

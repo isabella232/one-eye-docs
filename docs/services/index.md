@@ -3,7 +3,7 @@ title: Services
 weight: 200
 ---
 
-{{< contents >}}
+
 
 {{% include-headless "doc/one-eye/drill-down-intro.md" %}}
 
