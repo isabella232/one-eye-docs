@@ -3,8 +3,6 @@ title: Kubernetes Event Tailer
 weight: 100
 ---
 
-{{< contents >}}
-
 Kubernetes events are objects that provide insight into what is happening
 inside a cluster, such as what decisions were made by the scheduler or
 why some pods were evicted from the node.
