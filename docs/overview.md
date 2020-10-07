@@ -3,8 +3,6 @@ title: Overview
 weight: -10
 ---
 
-{{< contents >}}
-
 {{% include-headless "doc/one-eye-intro.md" %}}
 
 Banzai Cloud One Eye provides scalable, unified, and automated log and metric collection for your entire Kubernetes infrastructure, including cluster nodes, pods, applications, and services. It works on a variety of Kubernetes infrastructures, including on-premises solutions and cloud providers like AWS, Azure, Google Cloud, or Alibaba.
