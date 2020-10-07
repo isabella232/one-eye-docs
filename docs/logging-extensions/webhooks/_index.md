@@ -7,8 +7,6 @@ weight: 1000
 Another way to keep your custom file's content tailed aside of [`host file tailer`](../#host-file-tailer) service, to configure and use the `file tailer webhook` service.
 While the containers of the `host file tailers` run in a separated pod, `file tailer webhook` uses a different approach, it injects a sidecar container for every tailed file into your pod, triggered by a simple pod annotation.
 
-{{< toc >}}
-
 ## Triggering the webhook
 
 `File tailer webhook` is based on a [`Mutating Admission Webhook`](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) which gets called every time when a pod starts, and will be triggered when a pod specification contains an annotation with the `sidecar.logging-extensions.banzaicloud.io/tail` key. For example:
