@@ -12,7 +12,7 @@ To create a new logging flow or a logging output on the UI, complete the followi
 1. Navigate to **MENU > LOGGING OVERVIEW**, then click ![Create new icon](/docs/one-eye/headless/icon-create-new.png).
 1. Select the type of resource you want to create (flow or output).
 1. Select the namespace where you want to apply the new resource.
-    ![Create logging flows and outputs](create-flow.png)
+    ![Create logging flows and outputs](/docs/one-eye/configure-logging-infrastructure/configuration-overview/create-flow.png)
 1. Import the YAML configuration of the resource, or create a new one in the browser.
 
     - For details on configuring different output types, see the {{% xref "/docs/one-eye/logging-operator/quickstarts/_index.md" %}}.

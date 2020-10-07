@@ -40,7 +40,7 @@ Choose the method to manage your logging infrastructure that best fits your proj
 
 One Eye visualizes your logging infrastructure: your logging sources, flows, and outputs. In addition, you can access all the relevant metrics, logs, and other information with a few clicks.
 
-![One Eye Dashboard](/docs/one-eye/configuration-overview/overview-nocallouts.png)
+![One Eye Dashboard](/docs/one-eye/configure-logging-infrastructure/configuration-overview/overview-nocallouts.png)
 
 ## Drill-down to find problems fast
 

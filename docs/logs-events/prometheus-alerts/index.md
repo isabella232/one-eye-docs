@@ -37,4 +37,4 @@ The following details are displayed:
 - **LABELS**: The labels attached to the alert.
 - **ANNOTATIONS**: The annotations attached to the alert.
 
-If the labels contain reference to an existing pod, node, service, or workload, you can click on the label to jump to its details on the [SERVICES](/docs/one-eye/services/) or [WORKLOADS](/docs/one-eye/workloads/) page.
+If the labels contain reference to an existing pod, node, service, or workload, you can click on the label to jump to its details on the [SERVICES](/docs/one-eye/logs-events/services/) or [WORKLOADS](/docs/one-eye/logs-events/workloads/) page.
