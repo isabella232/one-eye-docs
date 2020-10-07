@@ -3,11 +3,6 @@ title: Logging extensions
 weight: 500
 ---
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Splits logging extension tailers page to thematic subpages
 Logging extensions are part of the Banzai Cloud One Eye observability system, and are also a standalone operator. Logging extensions were specifically developed to solve the problems of enterprises:
 
 - Collecting Kubernetes events to provide insight into what is happening
