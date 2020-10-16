@@ -1,6 +1,6 @@
 ---
 title: Browsing logs, events, and other information
-shortTitle: Logs and events
+shortTitle: Logs, events, metrics
 weight: 600
 ---
 

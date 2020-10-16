@@ -28,7 +28,7 @@ To search and browse the collected log messages, complete the following steps.
 1. Click **Search**. The logs matching the expression are displayed.
     ![Browse logs](browse-logs-1.png)
 1. To display the recent logs, select the time range from the **Time range** field.
-1. To display the logs of a specific time interval, disable **Relative Date**, and start date and end date fields, then click **Search**.
+1. To display the logs of a specific time interval, disable **Relative Date**, fill the start date and end date fields, then click **Search**.
     ![Browse logs of a specific time interval](browse-logs-time-interval.png)
 1. Clicking on a message opens its details.
     ![Filter logs](browse-logs-filter.png)
