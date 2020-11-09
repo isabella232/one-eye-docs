@@ -142,7 +142,7 @@ After you have completed the [Prerequisites](#prerequisites), you can install On
 
     > Note: For details on configuring different output types, see the {{% xref "/docs/one-eye/logging-operator/quickstarts/_index.md" %}}.
 
-1. Configure a logging flow. The basic template provides an empty flow. Customize the `match` section and add filters from the [supported filter list](/docs/one-eye/logging-operator/plugins/filters/).
+1. Configure a logging flow. The basic template provides an empty flow. Customize the `match` section and add filters from the [supported filter list](/docs/one-eye/logging-operator/configuration/plugins/filters/).
 
     ```bash
     $ one-eye logging configure flow
@@ -159,7 +159,7 @@ After you have completed the [Prerequisites](#prerequisites), you can install On
     spec:
     filters:
     # tag normalizer changes default kubernetes tags coming from fluentbit to the following format: namespace.pod.container
-    # https://banzaicloud.com/docs/one-eye/logging-operator/plugins/filters/tagnormaliser/
+    # https://banzaicloud.com/docs/one-eye/logging-operator/configuration/plugins/filters/tagnormaliser/
     - tag_normaliser: {}
     match:
     # a select without restrictions will forward all events to the outputRefs
