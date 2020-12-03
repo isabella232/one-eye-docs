@@ -10,7 +10,7 @@ One Eye 0.4 brings the following significant new features:
 
 - You can now easily restore archived logs into an Elasticsearch instance. For details, see {{% xref "/docs/one-eye/logs-events/log-restoration/index.md" %}}.
 - Search and display the collected metrics using the Prometheus PromQL query language directly on the One Eye interface. For details, see ({{< xref "/docs/one-eye/logs-events/metrics/index.md" >}}).
-- [Promtail support]({{< blogref "istio-canary-upgrade/index.md" >}}).
+- Promtail support.
 - Fluentd (1.11.5), Fluent Bit (1.6.4), and plugin updates.
 - Easier troubleshooting of [One Eye]({{< relref "/docs/one-eye/troubleshooting/index.md#explain" >}}) and the [Logging operator]({{< relref "/docs/one-eye/logging-operator/operation/troubleshooting/_index.md" >}}).
 
