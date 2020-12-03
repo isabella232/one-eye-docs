@@ -18,3 +18,26 @@ To debug the Logging operator, always check the Fluentd logs first. In One Eye, 
 1. Browse the logs, or use the **Search** field.
 
     ![Fluentd Logs](fluentd-pod-logs-2.png)
+
+## Explain Observer configuration {#explain}
+
+To display the documentation of the Observer custom resource, you can use the **one-eye explain** command, which is similar to *kubectl explain*. For example:
+
+```bash
+$ one-eye observer explain spec
+KIND:     Observer
+VERSION:  one-eye.banzaicloud.io/v1alpha1
+
+RESOURCE: spec <Object>
+
+DESCRIPTION:
+     ObserverSpec defines the desired state of Observer
+
+FIELDS:
+   certmanager <Object>
+     CertManager component descriptor
+
+   clusterName <string>
+     Custom name for cluster
+...
+```

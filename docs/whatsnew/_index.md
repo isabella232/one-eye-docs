@@ -12,7 +12,7 @@ One Eye 0.4 brings the following significant new features:
 - Search and display the collected metrics using the Prometheus PromQL query language directly on the One Eye interface. For details, see ({{< xref "/docs/one-eye/logs-events/metrics/index.md" >}}).
 - [Promtail support]({{< blogref "istio-canary-upgrade/index.md" >}}).
 - Fluentd (1.11.5), Fluent Bit (1.6.4), and plugin updates.
-- Easier troubleshooting of One Eye and the Logging Operator.
+- Easier troubleshooting of [One Eye]({{< relref "/docs/one-eye/troubleshooting/index.md#explain" >}}) and the [Logging operator]({{< relref "/docs/one-eye/logging-operator/operation/troubleshooting/_index.md" >}}).
 
 For a more detailed overview of the new features, see the [One Eye 0.4 announcement blog post]({{< blogref "one-eye-release-0.4/index.md" >}}).
 
